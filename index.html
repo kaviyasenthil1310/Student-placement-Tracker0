@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Placement Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="header">
+    <h1>Student Placement Tracker</h1>
+</header>
+
+<main class="container">
+
+    <section class="filters">
+        <h2>Filters</h2>
+        <label>
+            Department:
+            <select id="deptFilter">
+                <option value="all">All</option>
+                <option value="CSE">CSE</option>
+                <option value="IT">IT</option>
+                <option value="ECE">ECE</option>
+            </select>
+        </label>
+
+        <label>
+            Placement Status:
+            <select id="statusFilter">
+                <option value="all">All</option>
+                <option value="Placed">Placed</option>
+                <option value="Not Placed">Not Placed</option>
+            </select>
+        </label>
+
+        <button id="applyFilterBtn">Apply Filter</button>
+    </section>
+
+    <section class="cards">
+        <div class="card">
+            <h3>Total Students</h3>
+            <p id="totalStudents">0</p>
+        </div>
+        <div class="card">
+            <h3>Placed Students</h3>
+            <p id="placedStudents">0</p>
+        </div>
+        <div class="card">
+            <h3>Companies</h3>
+            <p id="totalCompanies">0</p>
+        </div>
+    </section>
+
+    <section class="tables">
+        <div class="table-section">
+            <h2>Students</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Roll No</th>
+                        <th>Name</th>
+                        <th>Department</th>
+                        <th>CGPA</th>
+                        <th>Status</th>
+                        <th>Company</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="studentsTableBody">
+                    <!-- Filled by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-section">
+            <h2>Companies</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Company</th>
+                        <th>Role</th>
+                        <th>Package (LPA)</th>
+                        <th>Eligibility CGPA</th>
+                    </tr>
+                </thead>
+                <tbody id="companiesTableBody">
+                    <!-- Filled by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
