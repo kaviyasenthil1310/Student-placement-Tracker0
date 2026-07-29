@@ -63,4 +63,4 @@ student-placement-tracker-web/
 
 ## Author
 
-- **Kaviya** – Final-year Computer Science Engineering student, aspiring Python Developer, Frontend Developer, and UI/UX Designer.
+- **Kaviya** 
