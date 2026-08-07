@@ -1,8 +1,3 @@
-© 2026 Kaviya Senthil. All Rights Reserved.
-
-This project and its source code are the intellectual property of Kaviya Senthil.
-No part of this project may be copied, modified, or distributed without prior written permission.
-
 # Student Placement Tracker (Web)
 
 A simple frontend web application to track student placement status using HTML, CSS, and JavaScript. It is designed for college placement cells to quickly view students, companies, and placement status on a clean dashboard. [69][74]
