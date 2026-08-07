@@ -6,8 +6,6 @@ const deptFilter = document.getElementById("deptFilter");
 const statusFilter = document.getElementById("statusFilter");
 const searchInput = document.getElementById("searchInput");
 const applyFilterBtn = document.getElementById("applyFilterBtn");
-const reportCompanyFilter = document.getElementById("reportCompanyFilter");
-const reportOutput = document.getElementById("reportOutput");
 
 const totalStudentsEl = document.getElementById("totalStudents");
 const placedStudentsEl = document.getElementById("placedStudents");
@@ -60,40 +58,6 @@ function renderStats() {
   placedStudentsEl.textContent = students.filter(s => s.status === "Placed").length;
   totalCompaniesEl.textContent = companies.length;
   openPositionsEl.textContent = companies.reduce((sum, company) => sum + company.openings, 0);
-}
-
-function renderReport() {
-  if (!reportCompanyFilter || !reportOutput) return;
-
-  reportCompanyFilter.innerHTML = '<option value="">Select Company</option>';
-  companies.forEach(company => {
-    const option = document.createElement("option");
-    option.value = company.id;
-    option.textContent = company.name;
-    reportCompanyFilter.appendChild(option);
-  });
-
-  const selectedCompanyId = Number(reportCompanyFilter.value);
-  if (!selectedCompanyId) {
-    reportOutput.innerHTML = "<p>Select a company to view its candidate report.</p>";
-    return;
-  }
-
-  const company = companies.find(c => c.id === selectedCompanyId);
-  const matchedStudents = students.filter(student => student.companyId === selectedCompanyId);
-
-  if (!company || matchedStudents.length === 0) {
-    reportOutput.innerHTML = "<p>No students linked to this company yet.</p>";
-    return;
-  }
-
-  reportOutput.innerHTML = `
-    <h3>${company.name} – ${company.role}</h3>
-    <p><strong>Requirements:</strong> ${company.requirements || "Open to all"}</p>
-    <ul>
-      ${matchedStudents.map(student => `<li>${student.name} — ${student.status} (${student.department})</li>`).join("")}
-    </ul>
-  `;
 }
 
 function renderStudentCompanyOptions() {
@@ -279,7 +243,6 @@ function updateStudentStatus(studentId) {
   saveData();
   renderStats();
   renderCompanies();
-  renderReport();
   renderStudents();
 }
 
@@ -290,7 +253,6 @@ function deleteStudent(studentId) {
   students = students.filter(s => s.id !== studentId);
   saveData();
   renderStats();
-  renderReport();
   renderStudents();
   alert(`${student.name} has been removed.`);
 }
@@ -313,7 +275,6 @@ function deleteCompany(companyId) {
   renderStats();
   renderStudentCompanyOptions();
   renderCompanies();
-  renderReport();
   renderStudents();
   alert(`${company.name} has been removed.`);
 }
@@ -355,7 +316,6 @@ function addStudent(event) {
   renderStats();
   renderStudentCompanyOptions();
   renderCompanies();
-  renderReport();
   renderStudents();
   alert(`${newStudent.name} added successfully.`);
 }
@@ -378,7 +338,6 @@ function addCompany(event) {
   saveData();
   renderStudentCompanyOptions();
   renderCompanies();
-  renderReport();
   renderStats();
   alert(`${newCompany.name} added successfully.`);
 }
@@ -391,10 +350,6 @@ searchInput.addEventListener("input", () => {
   renderStudents();
 });
 
-reportCompanyFilter.addEventListener("change", () => {
-  renderReport();
-});
-
 studentForm.addEventListener("submit", addStudent);
 companyForm.addEventListener("submit", addCompany);
 
@@ -402,5 +357,4 @@ loadData();
 renderStats();
 renderStudentCompanyOptions();
 renderCompanies();
-renderReport();
 renderStudents();
