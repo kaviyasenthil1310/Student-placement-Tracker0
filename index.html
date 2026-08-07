@@ -2,18 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Student Placement Tracker</title>
+    <title>Placement Tracker</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header class="header">
-    <h1>Student Placement Tracker</h1>
+    <h1>Placement Tracking System</h1>
 </header>
 
 <main class="container">
-
     <section class="filters">
-        <h2>Filters</h2>
+        <h2>Dashboard Filters</h2>
         <label>
             Department:
             <select id="deptFilter">
@@ -21,6 +20,7 @@
                 <option value="CSE">CSE</option>
                 <option value="IT">IT</option>
                 <option value="ECE">ECE</option>
+                <option value="EEE">EEE</option>
             </select>
         </label>
 
@@ -28,12 +28,21 @@
             Placement Status:
             <select id="statusFilter">
                 <option value="all">All</option>
+                <option value="Applied">Applied</option>
+                <option value="Shortlisted">Shortlisted</option>
+                <option value="Interviewed">Interviewed</option>
+                <option value="Selected">Selected</option>
                 <option value="Placed">Placed</option>
-                <option value="Not Placed">Not Placed</option>
+                <option value="Rejected">Rejected</option>
             </select>
         </label>
 
-        <button id="applyFilterBtn">Apply Filter</button>
+        <label>
+            Search:
+            <input id="searchInput" type="text" placeholder="Search student or company">
+        </label>
+
+        <button id="applyFilterBtn">Apply Filters</button>
     </section>
 
     <section class="cards">
@@ -49,6 +58,59 @@
             <h3>Companies</h3>
             <p id="totalCompanies">0</p>
         </div>
+        <div class="card">
+            <h3>Open Positions</h3>
+            <p id="openPositions">0</p>
+        </div>
+    </section>
+
+    <section class="student-form-section">
+        <h2>Add Student</h2>
+        <form id="studentForm" class="student-form">
+            <input id="rollNo" type="text" placeholder="Roll No" required>
+            <input id="studentName" type="text" placeholder="Student Name" required>
+            <input id="studentEmail" type="email" placeholder="Email" required>
+            <select id="studentDepartment" required>
+                <option value="">Department</option>
+                <option value="CSE">CSE</option>
+                <option value="IT">IT</option>
+                <option value="ECE">ECE</option>
+                <option value="EEE">EEE</option>
+            </select>
+            <input id="studentCgpa" type="number" step="0.1" min="0" max="10" placeholder="CGPA" required>
+            <input id="studentSkills" type="text" placeholder="Skills (comma separated)">
+            <select id="studentStatus">
+                <option value="Applied">Applied</option>
+                <option value="Shortlisted">Shortlisted</option>
+                <option value="Interviewed">Interviewed</option>
+                <option value="Selected">Selected</option>
+                <option value="Placed">Placed</option>
+                <option value="Rejected">Rejected</option>
+            </select>
+            <select id="studentCompanyId">
+                <option value="">Assign Company (optional)</option>
+            </select>
+            <button type="submit">Add Student</button>
+        </form>
+    </section>
+
+    <section class="student-form-section">
+        <h2>Add Company</h2>
+        <form id="companyForm" class="student-form">
+            <input id="companyName" type="text" placeholder="Company Name" required>
+            <input id="companyRole" type="text" placeholder="Role" required>
+            <input id="companyPackage" type="number" step="0.1" min="0" placeholder="Package (LPA)" required>
+            <input id="companyRequirements" type="text" placeholder="Requirements / Skills" required>
+            <select id="companyDepartment">
+                <option value="All">All Departments</option>
+                <option value="CSE">CSE</option>
+                <option value="IT">IT</option>
+                <option value="ECE">ECE</option>
+                <option value="EEE">EEE</option>
+            </select>
+            <input id="companyOpenings" type="number" min="1" placeholder="Openings" required>
+            <button type="submit">Add Company</button>
+        </form>
     </section>
 
     <section class="tables">
@@ -59,16 +121,16 @@
                     <tr>
                         <th>Roll No</th>
                         <th>Name</th>
+                        <th>Email</th>
                         <th>Department</th>
                         <th>CGPA</th>
+                        <th>Skills</th>
                         <th>Status</th>
                         <th>Company</th>
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tbody id="studentsTableBody">
-                    <!-- Filled by JavaScript -->
-                </tbody>
+                <tbody id="studentsTableBody"></tbody>
             </table>
         </div>
 
@@ -79,15 +141,23 @@
                     <tr>
                         <th>Company</th>
                         <th>Role</th>
-                        <th>Package (LPA)</th>
-                        <th>Eligibility CGPA</th>
+                        <th>Package</th>
+                        <th>Requirements</th>
+                        <th>Openings</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
-                <tbody id="companiesTableBody">
-                    <!-- Filled by JavaScript -->
-                </tbody>
+                <tbody id="companiesTableBody"></tbody>
             </table>
         </div>
+    </section>
+
+    <section class="student-form-section">
+        <h2>Company-wise Student Report</h2>
+        <select id="reportCompanyFilter">
+            <option value="">Select Company</option>
+        </select>
+        <div id="reportOutput" class="report-box"></div>
     </section>
 </main>
 
